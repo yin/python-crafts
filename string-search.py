@@ -83,7 +83,7 @@ def search(S, W):
 
 # In KMP algorithm, at every mismatch we try to skip previously matched
 # characters in S and in W. To do this we first build a table, let call it
-# kmp_table. This table will tell us, how many characters we can skip in W abd S
+# kmp_table. This table will tell us, how many characters we can skip in W and S
 # when a mismatch happens at particular position in W.
 
 # For the example of S1 and W1, at first mismatch we can skip all characters
@@ -118,10 +118,35 @@ def table_kmp(W):
             pos = pos + 1
     return overlay
 
+# While searching we'll use the KMP table to tell us how to how to change values
+# of m and i. In the algorithm bellow, we are first interested in a match. If we
+# are matching successfully, we keep attention to i, which tells us, when we
+# have reached the end end word W. If an mismatch occurs somewhere in the middle
+# of W we use the table to tell us how much to increase m and what to value set
+# i. At the beginning of W, we haven matched even the first character, so we
+# increment m and keep i to 0. An intuition is given in KMP table test bellow.
 def search_kmp(S, W):
     comps = 0
-    overlay = table_kmp(W)
-    return (None, comps, overlay)
+    table = table_kmp(W)
+    lens = len(S)
+    lenw = len(W)
+    m = 0
+    i = 0
+    while m+i < lens:
+        comps = comps + 1
+        if S[m+i] == W[i]:
+            if i == lenw - 1:
+                return (m, comps, table)
+            else:
+                i = i + 1
+        else:
+            if table[i] > -1:
+                i = table[i]
+                m = m + i - table[i]
+            else:
+                i = 0
+                m = m + 1
+    return (None, comps, table)
 
 if __name__ == '__main__':
     i = 0

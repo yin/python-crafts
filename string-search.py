@@ -6,8 +6,23 @@
 # If you compute any other information, which is interesting to inspect, return
 # it as the third element of the tuple: (m, c, i)
 
-W = 'aaaaab'
-S = 'aaaaaaaaaaab'
+test_sets = [
+    {
+        'word': 'abcd',
+        'string': 'abcXabcd',
+        'results': [4],
+    },
+    {
+        'word': 'aaaab',
+        'string': 'aaaaaaaab',
+        'results': [4],
+    },
+    {
+        'word': 'ababX',
+        'string': 'abababX',
+        'results': [2],
+    },
+]
 
 #from math import min
 
@@ -82,7 +97,8 @@ def table_kmp(W):
         elif cnd > 0:
             cnd = overlay[cnd]
         else:
-            cnd = 0
+            overlay[pos] = 0
+            pos = pos + 1
     return overlay
 
 def search_kmp(S, W):
@@ -90,7 +106,17 @@ def search_kmp(S, W):
     overlay = table_kmp(W)
     return (None, comps, overlay)
 
-print "String S: {0} ({1})".format(S, len(S))
-print "Word W  : {0} ({1})".format(W, len(W))
-print "Straith-forward search: " + str(search(S, W))
-print "Knuth-Morris-Prath search: " + str(search_kmp(S, W))
+if __name__ == '__main__':
+    i = 0
+    for test in test_sets:
+        i = i + 1
+        W = test['word']
+        S = test['string']
+        results = test['results']
+        
+        print "=== Test %d ===" % (i)
+        print "String S: {0} ({1})".format(S, len(S))
+        print "Word W  : {0} ({1})".format(W, len(W))
+        print "Expected results: {0}".format(results)
+        print "Straith-forward search: " + str(search(S, W))
+        print "Knuth-Morris-Prath search: " + str(search_kmp(S, W))

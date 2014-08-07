@@ -118,7 +118,7 @@ def table_kmp(W):
             pos = pos + 1
     return overlay
 
-# While searching we'll use the KMP table to tell us how to how to change values
+# While searching we'll use the KMP table to tell us how to change values
 # of m and i. In the algorithm bellow, we are first interested in a match. If we
 # are matching successfully, we keep attention to i, which tells us, when we
 # have reached the end end word W. If an mismatch occurs somewhere in the middle

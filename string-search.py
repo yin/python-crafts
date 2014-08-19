@@ -190,7 +190,7 @@ if __name__ == '__main__':
 
         # Lets rotate the KMP table left:
         # Pattern    : [ a, b, a, b, c, d, a, b, a, b, c,  d] (12)
-        # Shifted KMP: [ 0, 0, 1, 2, 0, 0, 1, 2, 3, 4, 5, -1]
+        # Rotated KMP: [ 0, 0, 1, 2, 0, 0, 1, 2, 3, 4, 5, -1]
 
         # What we can see an overlap with the pattern now. It was not straigth-
         # -forward at the beginning, but now we can see, what is the table_kmp

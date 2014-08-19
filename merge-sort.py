@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# NOTE: Took 40 minutes brutto to implement
+
 sort_test_set = [
     {
         'input': [5, 4, 1, 8, 7, 2, 6, 3],

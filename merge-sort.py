@@ -1,5 +1,14 @@
 #!/usr/bin/env python
 
+# Given an array of capmparable element, such as numbers, of length N, return
+# another array of the same elements, such that the elements appear in order
+# given by some comparison function.
+# In other words, if we choose two elements from returned array L and R, where
+# index of R is higher that index of L, the comparison will give always the same
+# result (or they are equal).
+#
+# 1. Use Merge Sort and comparison function L < R
+#
 # NOTE: Took 40 minutes brutto to implement
 
 sort_test_set = [

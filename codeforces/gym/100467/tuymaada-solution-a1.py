@@ -1,12 +1,20 @@
 #!/usr/bin/env python
 
 # Status:
-# The brute force is only good for N < 10e5. A better way to do this is to
+# =======
+# The brute force is only good for N < 10e5. It tries all the numbers M from
+# 2 to N-1 and count the divisors by iterating divisors from 1 to M/2
+#
+# A better solution:
+# =================
+#
+# A better way to do this is to
 # generate prime numbers p1, p2, .., pk and iterate all possible exponents to
 # them to generate the result p1^e1 * p2^e2 * ... * pk * ek. In this case the
 # number of divisors is given by formula (e1+1) * (e2+1) * ... * (ek+1).
 #
 # Problem Description:
+# ====================
 # From file: tuymaada-2014-day-1-en.docx 
 # Kolya and Vasya play a game. A natural number N is randomly selected, and then
 # each player must name a natural number not greater than N. The player whose
@@ -28,6 +36,8 @@
 # Constrains:
 # Run time: 1s
 # Memory: 64MB
+#
+# Submit to: http://codeforces.com/gym/100467/submit
 
 def find_max_divisors_product_bruteforce(N):
     result = 1

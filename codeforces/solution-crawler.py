@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Use this script to lookup Accepted solution at codeforce.com
+#
 # Requires
 # ========
 #
@@ -42,6 +44,7 @@ class Crawler:
 
     def crawl_range(self, range):
         for i in range:
+            info("Page %d:" % i);
             found = self.crawl_listing(i)
             if found != None:
                 for f in found:
@@ -119,13 +122,17 @@ def print_solution(solution, filename=None):
     if filename == None:
         print sol['problem'], sol['id'], sol['lang'], sol['time'], sol['memory']
     else:
-        print filename, sol['time'], sol['memory']
+        print filename
 
 def save_solution(solution):
     prob = solution['problem'].replace(' ', '')
+    sid = solution['id']
     auth = solution['author'].replace(' ', '')
-    filename = '{0}-{1}-{2}.{3}'.format(prob, auth, solution['id'], \
-                                     solution['lang'])
+    time = solution['time'].replace(' ', '')
+    mem = solution['memory'].replace(' ', '').lower()
+    lang = solution['lang'].replace(' ', '').lower()
+    filename = '{0}-{1}-{2}x{3}-{4}.{5}' \
+        .format(prob, sid, time, mem, auth, lang)
     path = SOLUTIONS_DIR + filename
     if not os.path.exists(SOLUTIONS_DIR):
         makedirs(SOLUTIONS_DIR)
@@ -144,4 +151,4 @@ if __name__ == '__main__':
     if solutions != None:
         for sol in solutions:
             filename = save_solution(sol)
-            print_solution(sol)
+            print_solution(sol, filename)
